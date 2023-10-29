@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>spring</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>spring_prac</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
 
     <!-- 添加 Spring Boot 的父 POM -->
     <parent>
@@ -34,14 +35,52 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version> <!-- Use the appropriate version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Add the Liquibase plugin -->
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.11.0</version> <!-- Use the latest Liquibase plugin version -->
+                <configuration>
+                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                    <!-- Optionally specify the changelog file directly -->
+                    <!-- <changeLogFile>src/main/resources/liquibase/changelog.xml</changeLogFile> -->
+                    <!-- Other configurations if needed -->
+                </configuration>
+                <dependencies>
+                    <!-- This dependency is required for MySQL -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.23</version> <!-- Use the appropriate MySQL connector version -->
+                    </dependency>
+                    <!-- Add other dependencies required by your Liquibase changelogs -->
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
+
+
 </project>

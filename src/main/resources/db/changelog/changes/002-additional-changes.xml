@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- ChangeSet to create a new table 'products' -->
+    <changeSet id="20231018-1" author="yourname">
+        <createTable tableName="products">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)" />
+            <column name="description" type="text" />
+            <column name="price" type="decimal(10,2)" />
+        </createTable>
+    </changeSet>
+
+    <!-- ChangeSet to add a new 'category' column to the 'products' table -->
+    <changeSet id="20231018-2" author="yourname">
+        <addColumn tableName="products">
+            <column name="category" type="varchar(255)" />
+        </addColumn>
+    </changeSet>
+
+    <!-- ChangeSet to create an index on the 'category' column of the 'products' table -->
+    <changeSet id="20231018-3" author="yourname">
+        <createIndex indexName="idx_products_category" tableName="products">
+            <column name="category" />
+        </createIndex>
+    </changeSet>
+
+    <!-- More changesets can be added here as needed -->
+
+</databaseChangeLog>
